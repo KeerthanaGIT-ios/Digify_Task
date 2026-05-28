@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/movie.dart';
-import '../../../services/api_service.dart';
+import '../../../services/firestore_service.dart';
 
 class PaginatedMoviesState {
   final List<Movie> movies;
@@ -39,60 +40,59 @@ class PaginatedMoviesState {
   }
 }
 
-class PopularMoviesNotifier extends StateNotifier<PaginatedMoviesState> {
-  final ApiService _apiService;
+final firestoreMoviesStreamProvider = StreamProvider<List<Movie>>((ref) {
+  final firestoreService = ref.watch(firestoreServiceProvider);
+  return firestoreService.watchMovies();
+});
 
-  PopularMoviesNotifier(this._apiService) : super(const PaginatedMoviesState()) {
+class PopularMoviesNotifier extends StateNotifier<PaginatedMoviesState> {
+  final Ref _ref;
+  StreamSubscription? _subscription;
+
+  PopularMoviesNotifier(this._ref) : super(const PaginatedMoviesState()) {
     loadMovies();
   }
 
   Future<void> loadMovies({bool isRefresh = false}) async {
-    // If already loading, or there's no more items (and it's not a refresh), do nothing
-    if (!isRefresh && (state.isLoading || state.isLoadMore || !state.hasMore)) {
-      return;
-    }
+    // If we already have a subscription and we aren't refreshing, do nothing
+    if (_subscription != null && !isRefresh) return;
 
-    if (isRefresh) {
+    _subscription?.cancel();
+
+    if (isRefresh || state.movies.isEmpty) {
       state = state.copyWith(isLoading: true, page: 1, movies: [], errorMessage: null, hasMore: true);
     } else {
-      if (state.movies.isEmpty) {
-        state = state.copyWith(isLoading: true, errorMessage: null);
-      } else {
-        state = state.copyWith(isLoadMore: true, errorMessage: null);
-      }
+      state = state.copyWith(isLoadMore: true, errorMessage: null);
     }
 
-    try {
-      final nextPage = state.page;
-      final newMovies = await _apiService.getPopularMovies(page: nextPage);
-
-      if (newMovies.isEmpty) {
+    _subscription = _ref.read(firestoreServiceProvider).watchMovies().listen(
+      (movies) {
+        state = state.copyWith(
+          movies: movies,
+          isLoading: false,
+          isLoadMore: false,
+          hasMore: false, // Streams handle all movies in real-time, no need for pagination limits
+          errorMessage: null,
+        );
+      },
+      onError: (err) {
         state = state.copyWith(
           isLoading: false,
           isLoadMore: false,
-          hasMore: false,
+          errorMessage: err.toString().replaceAll('Exception: ', ''),
         );
-      } else {
-        state = state.copyWith(
-          movies: isRefresh ? newMovies : [...state.movies, ...newMovies],
-          page: nextPage + 1,
-          isLoading: false,
-          isLoadMore: false,
-          hasMore: newMovies.length >= 20, // TMDB returns 20 results per page
-        );
-      }
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        isLoadMore: false,
-        errorMessage: e.toString().replaceAll('Exception: ', ''),
-      );
-    }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 }
 
 final popularMoviesProvider =
     StateNotifierProvider<PopularMoviesNotifier, PaginatedMoviesState>((ref) {
-  final apiService = ref.watch(apiServiceProvider);
-  return PopularMoviesNotifier(apiService);
+  return PopularMoviesNotifier(ref);
 });

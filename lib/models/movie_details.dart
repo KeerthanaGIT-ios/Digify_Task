@@ -13,6 +13,7 @@ class MovieDetails {
   final int? runtime;
   final String? tagline;
   final String? status;
+  final String? videoUrl;
 
   MovieDetails({
     required this.id,
@@ -26,6 +27,7 @@ class MovieDetails {
     this.runtime,
     this.tagline,
     this.status,
+    this.videoUrl,
   });
 
   String get releaseYear {
@@ -47,11 +49,17 @@ class MovieDetails {
     return MovieDetails(
       id: json['id'] as int? ?? 0,
       title: json['title'] as String? ?? 'Untitled',
-      overview: json['overview'] as String? ?? '',
-      posterPath: json['poster_path'] as String?,
-      backdropPath: json['backdrop_path'] as String?,
-      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
-      releaseDate: json['release_date'] as String?,
+      overview: json['overview'] as String? ?? json['description'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ??
+          json['posterUrl'] as String? ??
+          json['poster_url'] as String?,
+      backdropPath: json['backdrop_path'] as String? ??
+          json['backdropUrl'] as String? ??
+          json['backdrop_url'] as String?,
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ??
+          (json['rating'] as num?)?.toDouble() ??
+          0.0,
+      releaseDate: json['release_date'] as String? ?? json['releaseYear'] as String?,
       genres: (json['genres'] as List<dynamic>?)
               ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -59,6 +67,7 @@ class MovieDetails {
       runtime: json['runtime'] as int?,
       tagline: json['tagline'] as String?,
       status: json['status'] as String?,
+      videoUrl: json['videoUrl'] as String? ?? json['video_url'] as String?,
     );
   }
 
@@ -75,6 +84,7 @@ class MovieDetails {
       'runtime': runtime,
       'tagline': tagline,
       'status': status,
+      'videoUrl': videoUrl,
     };
   }
 
@@ -89,6 +99,7 @@ class MovieDetails {
       voteAverage: voteAverage,
       releaseDate: releaseDate,
       genreIds: genres.map((e) => e.id).toList(),
+      videoUrl: videoUrl,
     );
   }
 }

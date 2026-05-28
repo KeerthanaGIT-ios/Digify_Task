@@ -8,6 +8,7 @@ import '../../../models/movie.dart';
 import '../../../models/movie_details.dart';
 import '../../../widgets/error_view.dart';
 import '../../../widgets/loading_skeleton.dart';
+import '../../../widgets/movie_media_banner.dart';
 import '../../favorites/providers/favorites_provider.dart';
 import '../providers/movie_details_provider.dart';
 
@@ -42,6 +43,7 @@ class MovieDetailsScreen extends ConsumerWidget {
               backdropPath: initialMovie!.backdropPath,
               voteAverage: initialMovie!.voteAverage,
               releaseDate: initialMovie!.releaseDate,
+              videoUrl: initialMovie!.videoUrl,
               genres: [],
             );
             return _buildContent(
@@ -71,6 +73,7 @@ class MovieDetailsScreen extends ConsumerWidget {
               backdropPath: initialMovie!.backdropPath,
               voteAverage: initialMovie!.voteAverage,
               releaseDate: initialMovie!.releaseDate,
+              videoUrl: initialMovie!.videoUrl,
               genres: [],
             );
             return _buildContent(
@@ -101,6 +104,10 @@ class MovieDetailsScreen extends ConsumerWidget {
       'MovieDetailsScreen._buildContent: movieId=${details.id} posterUrl="$posterUrl" backdropUrl="$backdropUrl"',
     );
     final scaffoldBg = AppColors.background;
+    final mediaHeight = (MediaQuery.sizeOf(context).width * 9 / 16).clamp(
+      220.0,
+      360.0,
+    );
 
     // Convert details to Movie for favorites management
     final movieModel = details.toMovie();
@@ -109,7 +116,7 @@ class MovieDetailsScreen extends ConsumerWidget {
       slivers: [
         // SliverAppBar with Parallax Backdrop image
         SliverAppBar(
-          expandedHeight: 340,
+          expandedHeight: mediaHeight,
           pinned: true,
           stretch: true,
           backgroundColor: scaffoldBg,
@@ -141,55 +148,10 @@ class MovieDetailsScreen extends ConsumerWidget {
               StretchMode.zoomBackground,
               StretchMode.blurBackground,
             ],
-            background: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.network(
-                  backdropUrl.trim().isNotEmpty
-                      ? backdropUrl.trim()
-                      : 'https://picsum.photos/800/500',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-
-                    return Container(
-                      color: Colors.black12,
-                      child: const Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    debugPrint('Backdrop image failed: $backdropUrl');
-
-                    return Image.network(
-                      'https://picsum.photos/800/500',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                    );
-                  },
-                ),
-                // Gradient to fade details background into pure black scaffold body
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.3),
-                          scaffoldBg,
-                        ],
-                        stops: const [0.5, 0.8, 1.0],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            background: MovieMediaBanner(
+              videoUrl: details.videoUrl,
+              backdropPath: details.backdropPath,
+              posterPath: details.posterPath,
             ),
           ),
         ),

@@ -1,96 +1,51 @@
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/movie.dart';
 import '../models/movie_details.dart';
+import 'firestore_service.dart';
 
 final apiServiceProvider = Provider<ApiService>((ref) {
-  return ApiService();
+  final firestoreService = ref.watch(firestoreServiceProvider);
+  return ApiService(firestoreService);
 });
 
 class ApiService {
-  /// Private helper to load and decode the movies.json asset
-  Future<List<Map<String, dynamic>>> _loadMoviesData() async {
-    try {
-      final jsonString = await rootBundle.loadString('assets/movies.json');
-      final List<dynamic> decoded = json.decode(jsonString);
-      return decoded.map((e) => Map<String, dynamic>.from(e as Map)).toList();
-    } catch (e) {
-      throw Exception('Failed to load local offline database. Please check if assets/movies.json exists.');
-    }
-  }
+  final FirestoreService _firestoreService;
 
-  /// Fetch trending movies (simulated network delay, returns first 6 movies)
+  ApiService(this._firestoreService);
+
+  /// Fetch trending movies from Firestore (returns top 6 movies ordered by rating/createdAt)
   Future<List<Movie>> getTrendingMovies({int page = 1}) async {
     try {
-      await Future.delayed(const Duration(milliseconds: 600)); // Simulate loading delay
-      final data = await _loadMoviesData();
-      
-      // Return first 6 movies as trending
-      final trendingData = data.take(6).toList();
-      return trendingData.map((e) => Movie.fromJson(e)).toList();
+      final list = await _firestoreService.getMovies();
+      return list.take(6).toList();
     } catch (e) {
       throw Exception('Failed to load trending movies: $e');
     }
   }
 
-  /// Fetch popular movies (simulated network delay, paginated 6 items per page)
+  /// Fetch popular movies from Firestore (returns full list or mock pagination if desired)
   Future<List<Movie>> getPopularMovies({int page = 1}) async {
     try {
-      await Future.delayed(const Duration(milliseconds: 800)); // Simulate loading delay
-      final data = await _loadMoviesData();
-      
-      const pageSize = 6;
-      final startIndex = (page - 1) * pageSize;
-      
-      if (startIndex >= data.length) return [];
-      
-      final pagedData = data.skip(startIndex).take(pageSize).toList();
-      return pagedData.map((e) => Movie.fromJson(e)).toList();
+      return await _firestoreService.getMovies();
     } catch (e) {
       throw Exception('Failed to load popular movies: $e');
     }
   }
 
-  /// Search movies with a query (simulated network delay, paginated 6 items per page)
+  /// Search movies using Firestore service search
   Future<List<Movie>> searchMovies(String query, {int page = 1}) async {
-    if (query.trim().isEmpty) return const [];
-    
     try {
-      await Future.delayed(const Duration(milliseconds: 600)); // Simulate loading delay
-      final data = await _loadMoviesData();
-      
-      // Filter by title matching query
-      final filtered = data.where((item) {
-        final title = (item['title'] as String? ?? '').toLowerCase();
-        return title.contains(query.toLowerCase());
-      }).toList();
-      
-      const pageSize = 6;
-      final startIndex = (page - 1) * pageSize;
-      
-      if (startIndex >= filtered.length) return [];
-      
-      final pagedData = filtered.skip(startIndex).take(pageSize).toList();
-      return pagedData.map((e) => Movie.fromJson(e)).toList();
+      return await _firestoreService.searchMovies(query);
     } catch (e) {
       throw Exception('Failed to execute search: $e');
     }
   }
 
-  /// Fetch full movie details by ID (simulated network delay)
+  /// Fetch full movie details by ID from Firestore
   Future<MovieDetails> getMovieDetails(int id) async {
     try {
-      await Future.delayed(const Duration(milliseconds: 400)); // Simulate loading delay
-      final data = await _loadMoviesData();
-      
-      final movieData = data.firstWhere(
-        (item) => item['id'] == id,
-        orElse: () => throw Exception('Movie details not found for ID $id'),
-      );
-      
-      return MovieDetails.fromJson(movieData);
+      return await _firestoreService.getMovieDetails(id);
     } catch (e) {
       throw Exception('Failed to load movie details: $e');
     }

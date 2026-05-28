@@ -10,6 +10,9 @@ class Movie {
   final double voteAverage;
   final String? releaseDate;
   final List<int> genreIds;
+  final String? category;
+  final String? videoUrl;
+  final dynamic createdAt;
 
   Movie({
     required this.id,
@@ -20,6 +23,9 @@ class Movie {
     required this.voteAverage,
     this.releaseDate,
     required this.genreIds,
+    this.category,
+    this.videoUrl,
+    this.createdAt,
   });
 
   String get releaseYear {
@@ -64,26 +70,48 @@ class Movie {
   }
 
   factory Movie.fromJson(Map<String, dynamic> json) {
+    // Determine category based on Firestore 'category' field or fallback to genres in movies.json
+    String? categoryVal = json['category'] as String?;
+    if (categoryVal == null) {
+      final genres = json['genres'] as List<dynamic>?;
+      if (genres != null && genres.isNotEmpty) {
+        categoryVal = (genres.first as Map)['name'] as String?;
+      }
+    }
+
+    // Map release year to release date format if needed
+    String? releaseDateVal = json['release_date'] as String? ?? json['first_air_date'] as String?;
+    if (releaseDateVal == null && json['releaseYear'] != null) {
+      releaseDateVal = '${json['releaseYear']}-01-01';
+    }
+
     return Movie(
       id: json['id'] as int? ?? 0,
       title: json['title'] as String? ?? json['name'] as String? ?? 'Untitled',
-      overview: json['overview'] as String? ?? '',
-      posterPath:
-          json['poster_path'] as String? ??
+      overview: json['overview'] as String? ?? json['description'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ??
           json['posterUrl'] as String? ??
           json['poster_url'] as String?,
-      backdropPath: json['backdrop_path'] as String?,
-      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
-      releaseDate:
-          json['release_date'] as String? ?? json['first_air_date'] as String?,
-      genreIds:
-          (json['genre_ids'] as List<dynamic>?)
+      backdropPath: json['backdrop_path'] as String? ??
+          json['backdropUrl'] as String? ??
+          json['backdrop_url'] as String? ??
+          json['posterUrl'] as String? ??
+          json['poster_url'] as String? ??
+          json['poster_path'] as String?,
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ??
+          (json['rating'] as num?)?.toDouble() ??
+          0.0,
+      releaseDate: releaseDateVal,
+      genreIds: (json['genre_ids'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
           (json['genres'] as List<dynamic>?)
               ?.map((e) => (e as Map)['id'] as int)
               .toList() ??
           [],
+      category: categoryVal,
+      videoUrl: json['videoUrl'] as String? ?? json['video_url'] as String?,
+      createdAt: json['createdAt'],
     );
   }
 
@@ -97,6 +125,23 @@ class Movie {
       'vote_average': voteAverage,
       'release_date': releaseDate,
       'genre_ids': genreIds,
+      'category': category,
+      'videoUrl': videoUrl,
+      'createdAt': createdAt,
+    };
+  }
+
+  // Helper method to convert Movie to Firestore document map
+  Map<String, dynamic> toFirestore() {
+    return {
+      'title': title,
+      'description': overview,
+      'posterUrl': posterUrl,
+      'videoUrl': videoUrl,
+      'category': category ?? 'Action',
+      'rating': voteAverage,
+      'releaseYear': releaseYear,
+      'createdAt': createdAt ?? DateTime.now().toIso8601String(),
     };
   }
 }

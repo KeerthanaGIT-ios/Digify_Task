@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../widgets/error_view.dart';
@@ -80,6 +81,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         title: const Text('MOVIE DISCOVERY'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.admin_panel_settings_rounded, color: Colors.white),
+            tooltip: 'Admin Dashboard',
+            onPressed: () => context.push('/admin'),
+          ),
           IconButton(
             icon: const Icon(Icons.favorite_rounded, color: AppColors.primaryRed),
             tooltip: 'My Favorites',
