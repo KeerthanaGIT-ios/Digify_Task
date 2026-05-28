@@ -24,7 +24,7 @@ class MovieDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detailsAsync = ref.watch(movieDetailsProvider(movieId));
-    
+
     // Watch favorites state to dynamically update favorited UI
     final isFav = ref.watch(favoritesProvider).any((m) => m.id == movieId);
 
@@ -73,11 +73,15 @@ class MovieDetailsScreen extends ConsumerWidget {
               releaseDate: initialMovie!.releaseDate,
               genres: [],
             );
-            return _buildContent(context, ref, loadingDetails, isFav, isDetailsLoading: true);
+            return _buildContent(
+              context,
+              ref,
+              loadingDetails,
+              isFav,
+              isDetailsLoading: true,
+            );
           }
-          return Scaffold(
-            body: SafeArea(child: LoadingSkeleton.details()),
-          );
+          return Scaffold(body: SafeArea(child: LoadingSkeleton.details()));
         },
       ),
     );
@@ -93,7 +97,9 @@ class MovieDetailsScreen extends ConsumerWidget {
   }) {
     final backdropUrl = ApiConstants.getBackdropUrl(details.backdropPath);
     final posterUrl = ApiConstants.getPosterUrl(details.posterPath);
-    debugPrint('MovieDetailsScreen._buildContent: movieId=${details.id} posterUrl="$posterUrl" backdropUrl="$backdropUrl"');
+    debugPrint(
+      'MovieDetailsScreen._buildContent: movieId=${details.id} posterUrl="$posterUrl" backdropUrl="$backdropUrl"',
+    );
     final scaffoldBg = AppColors.background;
 
     // Convert details to Movie for favorites management
@@ -139,25 +145,32 @@ class MovieDetailsScreen extends ConsumerWidget {
               fit: StackFit.expand,
               children: [
                 Image.network(
-                  backdropUrl,
+                  backdropUrl.trim().isNotEmpty
+                      ? backdropUrl.trim()
+                      : 'https://picsum.photos/800/500',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Shimmer.fromColors(
-                      baseColor: AppColors.shimmerBase,
-                      highlightColor: AppColors.shimmerHighlight,
-                      child: Container(color: Colors.white),
+
+                    return Container(
+                      color: Colors.black12,
+                      child: const Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
                     );
                   },
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: AppColors.surface,
-                    child: const Center(
-                      child: Icon(Icons.movie_creation_outlined,
-                          color: AppColors.textSecondary, size: 64),
-                    ),
-                  ),
+                  errorBuilder: (context, error, stackTrace) {
+                    debugPrint('Backdrop image failed: $backdropUrl');
+
+                    return Image.network(
+                      'https://picsum.photos/800/500',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    );
+                  },
                 ),
                 // Gradient to fade details background into pure black scaffold body
                 Positioned.fill(
@@ -185,7 +198,10 @@ class MovieDetailsScreen extends ConsumerWidget {
         SliverList(
           delegate: SliverChildListDelegate([
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -201,43 +217,56 @@ class MovieDetailsScreen extends ConsumerWidget {
                           height: 150,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: AppColors.border, width: 1),
+                            border: Border.all(
+                              color: AppColors.border,
+                              width: 1,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withValues(alpha: 0.5),
                                 blurRadius: 10,
                                 offset: const Offset(0, 5),
-                              )
+                              ),
                             ],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(7),
                             child: Image.network(
-                              posterUrl,
+                              posterUrl.trim().isNotEmpty
+                                  ? posterUrl.trim()
+                                  : 'https://picsum.photos/300/450',
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: double.infinity,
-                              loadingBuilder: (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Shimmer.fromColors(
-                                  baseColor: AppColors.shimmerBase,
-                                  highlightColor: AppColors.shimmerHighlight,
-                                  child: Container(color: Colors.white),
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+
+                                    return Container(
+                                      color: Colors.black12,
+                                      child: const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                              errorBuilder: (context, error, stackTrace) {
+                                debugPrint('Poster image failed: $posterUrl');
+
+                                return Image.network(
+                                  'https://picsum.photos/300/450',
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
                                 );
                               },
-                              errorBuilder: (context, error, stackTrace) => Container(
-                                color: AppColors.surface,
-                                child: const Center(
-                                  child: Icon(Icons.movie,
-                                      color: AppColors.textSecondary),
-                                ),
-                              ),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(width: 16),
-                      
+
                       // Title and Meta
                       Expanded(
                         child: Column(
@@ -253,9 +282,10 @@ class MovieDetailsScreen extends ConsumerWidget {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            
+
                             // Tagline if available
-                            if (details.tagline != null && details.tagline!.isNotEmpty) ...[
+                            if (details.tagline != null &&
+                                details.tagline!.isNotEmpty) ...[
                               Text(
                                 '"${details.tagline}"',
                                 style: const TextStyle(
@@ -277,7 +307,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 8),
                             ],
-                            
+
                             // Release Year and Rating Row
                             Row(
                               children: [
@@ -285,7 +315,9 @@ class MovieDetailsScreen extends ConsumerWidget {
                                 if (details.releaseYear.isNotEmpty)
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: AppColors.cardBackground,
                                       borderRadius: BorderRadius.circular(4),
@@ -300,7 +332,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                                     ),
                                   ),
                                 const SizedBox(width: 12),
-                                
+
                                 // Rating
                                 if (details.voteAverage > 0) ...[
                                   const Icon(
@@ -328,7 +360,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                               ],
                             ),
                             const SizedBox(height: 8),
-                            
+
                             // Runtime and Status Info
                             if (isDetailsLoading)
                               Shimmer.fromColors(
@@ -340,7 +372,8 @@ class MovieDetailsScreen extends ConsumerWidget {
                                   color: Colors.white,
                                 ),
                               )
-                            else if (details.runtime != null && details.runtime! > 0)
+                            else if (details.runtime != null &&
+                                details.runtime! > 0)
                               Row(
                                 children: [
                                   const Icon(
@@ -365,7 +398,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                                         fontSize: 12,
                                       ),
                                     ),
-                                  ]
+                                  ],
                                 ],
                               ),
                           ],
@@ -374,7 +407,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  
+
                   // Genres Wrap Section
                   const Text(
                     'Genres',
@@ -408,7 +441,10 @@ class MovieDetailsScreen extends ConsumerWidget {
                   else if (details.genres.isEmpty)
                     const Text(
                       'No genres available',
-                      style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+                      style: TextStyle(
+                        color: AppColors.textMuted,
+                        fontSize: 13,
+                      ),
                     )
                   else
                     Wrap(
@@ -417,12 +453,16 @@ class MovieDetailsScreen extends ConsumerWidget {
                       children: details.genres.map((genre) {
                         return Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.cardBackground,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: AppColors.primaryRed.withValues(alpha: 0.3),
+                              color: AppColors.primaryRed.withValues(
+                                alpha: 0.3,
+                              ),
                               width: 0.8,
                             ),
                           ),
@@ -437,7 +477,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                       }).toList(),
                     ),
                   const SizedBox(height: 24),
-                  
+
                   // Overview Section
                   const Text(
                     'Overview',
@@ -458,7 +498,7 @@ class MovieDetailsScreen extends ConsumerWidget {
                       height: 1.5,
                     ),
                   ),
-                  
+
                   // Inline error notification if fetching details failed but we are displaying basic data
                   if (errorMessage != null) ...[
                     const SizedBox(height: 24),
@@ -473,14 +513,18 @@ class MovieDetailsScreen extends ConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.warning_amber_rounded,
-                              color: AppColors.primaryRed),
+                          const Icon(
+                            Icons.warning_amber_rounded,
+                            color: AppColors.primaryRed,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               'Could not load extra movie details: $errorMessage',
                               style: const TextStyle(
-                                  color: AppColors.primaryRed, fontSize: 12),
+                                color: AppColors.primaryRed,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                           TextButton(
@@ -488,7 +532,10 @@ class MovieDetailsScreen extends ConsumerWidget {
                                 ref.invalidate(movieDetailsProvider(movieId)),
                             child: const Text(
                               'Retry',
-                              style: TextStyle(color: Colors.white, fontSize: 12),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],

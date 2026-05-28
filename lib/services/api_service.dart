@@ -10,16 +10,12 @@ final apiServiceProvider = Provider<ApiService>((ref) {
 });
 
 class ApiService {
-  List<Map<String, dynamic>>? _cachedMovies;
-
   /// Private helper to load and decode the movies.json asset
   Future<List<Map<String, dynamic>>> _loadMoviesData() async {
-    if (_cachedMovies != null) return _cachedMovies!;
     try {
       final jsonString = await rootBundle.loadString('assets/movies.json');
       final List<dynamic> decoded = json.decode(jsonString);
-      _cachedMovies = decoded.map((e) => Map<String, dynamic>.from(e as Map)).toList();
-      return _cachedMovies!;
+      return decoded.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     } catch (e) {
       throw Exception('Failed to load local offline database. Please check if assets/movies.json exists.');
     }

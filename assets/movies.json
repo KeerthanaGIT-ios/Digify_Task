@@ -3,14 +3,23 @@
     "id": 1,
     "title": "Inception",
     "overview": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project.",
-    "poster_path": "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/7/7f/Inception_ver3.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.8,
     "release_date": "2010-07-16",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 878, "name": "Science Fiction"},
-      {"id": 12, "name": "Adventure"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      }
     ],
     "runtime": 148,
     "tagline": "Your mind is the scene of the crime.",
@@ -20,14 +29,23 @@
     "id": 2,
     "title": "The Dark Knight",
     "overview": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-    "poster_path": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 9.0,
     "release_date": "2008-07-18",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 80, "name": "Crime"},
-      {"id": 18, "name": "Drama"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 80,
+        "name": "Crime"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      }
     ],
     "runtime": 152,
     "tagline": "Why So Serious?",
@@ -37,14 +55,23 @@
     "id": 3,
     "title": "Interstellar",
     "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
-    "poster_path": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.7,
     "release_date": "2014-11-07",
     "genres": [
-      {"id": 12, "name": "Adventure"},
-      {"id": 18, "name": "Drama"},
-      {"id": 878, "name": "Science Fiction"}
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      }
     ],
     "runtime": 169,
     "tagline": "Mankind was born on Earth. It was never meant to die here.",
@@ -54,13 +81,19 @@
     "id": 4,
     "title": "Pulp Fiction",
     "overview": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption in Los Angeles.",
-    "poster_path": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/8/82/Pulp_Fiction_cover.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1585647347483-22b66260dfff?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.9,
     "release_date": "1994-10-14",
     "genres": [
-      {"id": 80, "name": "Crime"},
-      {"id": 18, "name": "Drama"}
+      {
+        "id": 80,
+        "name": "Crime"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      }
     ],
     "runtime": 154,
     "tagline": "Just because you are a character doesn't mean that you have character.",
@@ -70,13 +103,19 @@
     "id": 5,
     "title": "The Matrix",
     "overview": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
-    "poster_path": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.7,
     "release_date": "1999-03-31",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 878, "name": "Science Fiction"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      }
     ],
     "runtime": 136,
     "tagline": "Free your mind.",
@@ -86,14 +125,23 @@
     "id": 6,
     "title": "Gladiator",
     "overview": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
-    "poster_path": "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/8/8d/Gladiator_ver1.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.5,
     "release_date": "2000-05-05",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"},
-      {"id": 18, "name": "Drama"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      }
     ],
     "runtime": 155,
     "tagline": "What we do in life echoes in eternity.",
@@ -103,14 +151,23 @@
     "id": 7,
     "title": "Parasite",
     "overview": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
-    "poster_path": "https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/5/53/Parasite_%282019_film%29.png",
     "backdrop_path": "https://images.unsplash.com/photo-1504701954957-2390f806e9f4?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.6,
     "release_date": "2019-05-30",
     "genres": [
-      {"id": 18, "name": "Drama"},
-      {"id": 53, "name": "Thriller"},
-      {"id": 35, "name": "Comedy"}
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 53,
+        "name": "Thriller"
+      },
+      {
+        "id": 35,
+        "name": "Comedy"
+      }
     ],
     "runtime": 132,
     "tagline": "Act like you own the place.",
@@ -120,14 +177,23 @@
     "id": 8,
     "title": "Avatar: The Way of Water",
     "overview": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
-    "poster_path": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/5/54/Avatar_The_Way_of_Water_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 7.7,
     "release_date": "2022-12-16",
     "genres": [
-      {"id": 878, "name": "Science Fiction"},
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"}
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      },
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      }
     ],
     "runtime": 192,
     "tagline": "Return to Pandora.",
@@ -137,14 +203,23 @@
     "id": 9,
     "title": "Spirited Away",
     "overview": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
-    "poster_path": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/d/db/Spirited_Away_Japanese_poster.png",
     "backdrop_path": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.6,
     "release_date": "2001-07-20",
     "genres": [
-      {"id": 16, "name": "Animation"},
-      {"id": 14, "name": "Fantasy"},
-      {"id": 10751, "name": "Family"}
+      {
+        "id": 16,
+        "name": "Animation"
+      },
+      {
+        "id": 14,
+        "name": "Fantasy"
+      },
+      {
+        "id": 10751,
+        "name": "Family"
+      }
     ],
     "runtime": 125,
     "tagline": "Nothing that happens is ever forgotten, even if you can't remember it.",
@@ -154,14 +229,23 @@
     "id": 10,
     "title": "Joker",
     "overview": "During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.",
-    "poster_path": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.2,
     "release_date": "2019-10-04",
     "genres": [
-      {"id": 80, "name": "Crime"},
-      {"id": 18, "name": "Drama"},
-      {"id": 53, "name": "Thriller"}
+      {
+        "id": 80,
+        "name": "Crime"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 53,
+        "name": "Thriller"
+      }
     ],
     "runtime": 122,
     "tagline": "Put on a happy face.",
@@ -171,12 +255,15 @@
     "id": 11,
     "title": "Fight Club",
     "overview": "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.",
-    "poster_path": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/f/fc/Fight_Club_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.8,
     "release_date": "1999-10-15",
     "genres": [
-      {"id": 18, "name": "Drama"}
+      {
+        "id": 18,
+        "name": "Drama"
+      }
     ],
     "runtime": 139,
     "tagline": "Mischief. Mayhem. Soap.",
@@ -186,14 +273,23 @@
     "id": 12,
     "title": "Spider-Man: Into the Spider-Verse",
     "overview": "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
-    "poster_path": "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/f/fa/Spider-Man_Into_the_Spider-Verse_poster.png",
     "backdrop_path": "https://images.unsplash.com/photo-1569003339405-ea396a5a8a90?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.4,
     "release_date": "2018-12-14",
     "genres": [
-      {"id": 16, "name": "Animation"},
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"}
+      {
+        "id": 16,
+        "name": "Animation"
+      },
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      }
     ],
     "runtime": 117,
     "tagline": "More than one wears the mask.",
@@ -203,13 +299,19 @@
     "id": 13,
     "title": "Whiplash",
     "overview": "A promising young drummer enrolls at a cut-throat music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing to realize a student's potential.",
-    "poster_path": "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/0/01/Whiplash_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.4,
     "release_date": "2014-10-10",
     "genres": [
-      {"id": 18, "name": "Drama"},
-      {"id": 10402, "name": "Music"}
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 10402,
+        "name": "Music"
+      }
     ],
     "runtime": 107,
     "tagline": "Not quite my tempo.",
@@ -219,14 +321,23 @@
     "id": 14,
     "title": "Forrest Gump",
     "overview": "The history of the United States from the 1950s to the '70s unfolds from the perspective of an Alabama man with an IQ of 75, who yearns to be reunited with his childhood sweetheart.",
-    "poster_path": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.8,
     "release_date": "1994-07-06",
     "genres": [
-      {"id": 35, "name": "Comedy"},
-      {"id": 18, "name": "Drama"},
-      {"id": 10749, "name": "Romance"}
+      {
+        "id": 35,
+        "name": "Comedy"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 10749,
+        "name": "Romance"
+      }
     ],
     "runtime": 142,
     "tagline": "Life is like a box of chocolates...you never know what you're gonna get.",
@@ -236,13 +347,19 @@
     "id": 15,
     "title": "Titanic",
     "overview": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
-    "poster_path": "https://images.unsplash.com/photo-1500077423678-25eead48513a?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/2/22/Titanic_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 7.9,
     "release_date": "1997-12-19",
     "genres": [
-      {"id": 18, "name": "Drama"},
-      {"id": 10749, "name": "Romance"}
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 10749,
+        "name": "Romance"
+      }
     ],
     "runtime": 194,
     "tagline": "Nothing on Earth could come between them.",
@@ -252,14 +369,23 @@
     "id": 16,
     "title": "The Lord of the Rings: The Fellowship of the Ring",
     "overview": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
-    "poster_path": "https://images.unsplash.com/photo-1506466010722-395ee2bef857?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.9,
     "release_date": "2001-12-19",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"},
-      {"id": 14, "name": "Fantasy"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 14,
+        "name": "Fantasy"
+      }
     ],
     "runtime": 178,
     "tagline": "One Ring to rule them all.",
@@ -269,14 +395,23 @@
     "id": 17,
     "title": "Avengers: Endgame",
     "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
-    "poster_path": "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.3,
     "release_date": "2019-04-26",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"},
-      {"id": 878, "name": "Science Fiction"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      }
     ],
     "runtime": 181,
     "tagline": "Avenge the fallen.",
@@ -286,14 +421,23 @@
     "id": 18,
     "title": "Star Wars: A New Hope",
     "overview": "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
-    "poster_path": "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?w=500&auto=format&fit=crop&q=60",
+    "poster_path": "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg",
     "backdrop_path": "https://images.unsplash.com/photo-1547700055-b61c87f4a685?w=1000&auto=format&fit=crop&q=80",
     "vote_average": 8.6,
     "release_date": "1977-05-25",
     "genres": [
-      {"id": 28, "name": "Action"},
-      {"id": 12, "name": "Adventure"},
-      {"id": 878, "name": "Science Fiction"}
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      }
     ],
     "runtime": 121,
     "tagline": "A long time ago in a galaxy far, far away...",
