@@ -56,15 +56,18 @@ lib/
 
 ### Movie Details
 
-![Details](screenshots/details.png)
+<img width="1080" height="2400" alt="details" src="https://github.com/user-attachments/assets/3c658460-528c-456a-b132-f5b1aa3b2935" />
+
 
 ### Admin Dashboard
 
-![Admin](screenshots/admin.png)
+<img width="1080" height="2400" alt="admin" src="https://github.com/user-attachments/assets/1159666a-40d6-4326-8629-1a1e2e657074" />
+
 
 ### Add Movie Screen
 
-![Add Movie](screenshots/add_movie.png)
+<img width="1080" height="2400" alt="add_movie" src="https://github.com/user-attachments/assets/4f2a3f99-8d36-4840-9692-107650fed46d" />
+
 
 ## 🔥 Firebase Integration
 
